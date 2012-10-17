@@ -142,6 +142,25 @@ describe User do
     it { should be_admin }
   end
 
+	#~ Exercise 9.6.1
+  describe "accessible attributes" do
+    it "should not allow access to admin" do
+      expect do
+				User.new(name: "Example User", email: "user@example.com", 
+                     password: "foobar", password_confirmation: "foobar", admin: true)
+      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+    end    
+  end
+
+	#~ Exercise 9.6.9
+	describe "admin user should not be able to delete itself" do
+		before do
+			@user.save!
+      @user.toggle!(:admin)
+			@user.delete
+		end
+		it { should be_valid }
+	end
 
 
 end
