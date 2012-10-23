@@ -47,6 +47,11 @@ describe "Static pages" do
           page.should have_selector("li##{item.id}", text: item.content)
         end
       end
+      
+      it "should render the user's micropost count" do
+				page.should have_selector("span", text: "2 microposts")
+      end
+
     end
 
   end
